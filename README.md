@@ -1,58 +1,134 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏋️ Sistema de Gestión de Gimnasio (Laravel)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema web desarrollado con **Laravel** y **MySQL** para la administración integral de un gimnasio, control de usuarios, roles (Administrador, Entrenador, Cliente) y gestión operativa (`ggymrdsport`).
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Requisitos Previos
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Asegúrate de tener instalado en tu entorno de desarrollo lo siguiente:
+- **PHP** (versión 8.2 o superior recomendada)
+- **Composer** (gestor de dependencias de PHP)
+- **MySQL** o MariaDB
+- **Node.js y NPM** (para la gestión de assets con Vite)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## ⚙️ Instalación y Configuración Inicial
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Sigue estos pasos para clonar y poner en marcha el proyecto en tu máquina local:
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. **Clonar el repositorio:**
+   ```bash
+   git clone <url-de-tu-repositorio>
+   cd nombre-del-proyecto# 🏋️ Sistema de Gestión de Gimnasio (Laravel)
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+Sistema web desarrollado con **Laravel** y **MySQL** para la administración integral de un gimnasio, control de usuarios, roles (Administrador, Entrenador, Cliente) y gestión operativa (`ggymrdsport`).
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## 🚀 Requisitos Previos
 
-```bash
-composer require laravel/boost --dev
+Asegúrate de tener instalado en tu entorno de desarrollo lo siguiente:
+- **PHP** (versión 8.2 o superior recomendada)
+- **Composer** (gestor de dependencias de PHP)
+- **MySQL** o MariaDB
+- **Node.js y NPM** (para la gestión de assets con Vite)
 
-php artisan boost:install
-```
+---
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## ⚙️ Instalación y Configuración Inicial
 
-## Contributing
+Sigue estos pasos para clonar y poner en marcha el proyecto en tu máquina local:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. **Clonar el repositorio:**
+   ```bash
+   git clone <url-de-tu-repositorio>
+   cd nombre-del-proyecto
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+2. **Pasos para inicializar el proyecto:**
 
-## Security Vulnerabilities
+composer install
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+npm install
 
-## License
+3. **Base de Datos:**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+configura las credenciales de la base de datos en el archivo .env
+
+4. **Ejecutar las migraciones y seeders:**
+
+php artisan migrate
+php artisan db:seed 
+php artisan db:seed --class=RolesTableSeeder
+
+
+5. **Ejecutar el servidor:**
+
+php artisan serve
+modo desarrollo: npm run dev
+modo produccion: npm run build
+
+
+6. **Manejos en migraciones:** 
+    php artisan migrate:rollback
+    php artisan migrate:reset
+    php artisan migrate:fresh
+
+
+7. **Consola Interactiva Tinker:**
+
+php artisan tinker
+
+8. **Crear un modelo con migracion, factory y seeders:**
+
+php artisan make:model ModelName -m -f -s
+
+9. **Crear un controlador:**
+
+php artisan make:controller NombreController 
+
+10. **Crear un modelo**
+
+php artisan make:model NombreModelo
+
+11. **Crear un controlador con metodos CRUD**
+
+php artisan make:controller NombreController --resource
+
+12. **Crear Migraciones y Seeders**
+php artisan make:migration create_nombre_tabla_table
+php artisan make:seeder NombreSeeder
+
+13. **Crear un Factory**
+php artisan make:factory NombreFactory
+
+14. **Manejos en ruta**
+    - Ruta básica
+    php artisan route:list
+    php artisan route:clear
+    php artisan route:cache
+15. **Crear Form request**
+
+php artisan make:request NombreRequest
+
+16. **Limpieza y Optimizacion**
+    - Limpieza de logs
+    php artisan optimize:clear
+    - Limpieza de rutas
+    php artisan route:clear
+    - Limpieza de cache
+    php artisan cache:clear
+    - Limpieza de config
+    php artisan config:clear
+    - Limpieza de vistas
+    php artisan view:clear
+
+
+    17. **Actualizar dependencias del proyecto**
+    composer update
+    18. **Actualizar mapa de clases de artisan**
+    composer dump-autoload -o    
+    
+    
