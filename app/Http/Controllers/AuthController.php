@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rol;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -91,13 +90,11 @@ class AuthController extends Controller
             return redirect()->route('dashboard');
         }
 
-        $roles = Rol::all();
-
-        return view('auth.register', compact('roles'));
+        return view('auth.register');
     }
 
     /**
-     * Registra un nuevo usuario en la base de datos.
+     * Registra un nuevo usuario en la base de datos con el rol 'cliente'.
      */
     public function register(Request $request): RedirectResponse
     {
@@ -105,7 +102,6 @@ class AuthController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'roles_id' => ['required', 'exists:roles,id'],
         ], [
             'name.required' => 'El nombre completo es requerido.',
             'email.required' => 'El correo electrónico es requerido.',
@@ -114,15 +110,14 @@ class AuthController extends Controller
             'password.required' => 'La contraseña es requerida.',
             'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
             'password.confirmed' => 'La confirmación de la contraseña no coincide.',
-            'roles_id.required' => 'Debes seleccionar un rol para el usuario.',
-            'roles_id.exists' => 'El rol seleccionado no es válido.',
         ]);
 
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => $validated['password'],
-            'roles_id' => $validated['roles_id'],
+            'rol' => 'cliente',
+            'estado' => 'activo',
         ]);
 
         Auth::login($user);

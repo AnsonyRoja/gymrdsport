@@ -3,395 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gym RD Sport - Tu Gimnasio, Tu Rendimiento</title>
+    <title>Gym RDSport - Centro de Alto Rendimiento</title>
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        slate: {
+                            50: '#F8FAFC',
+                            100: '#F1F5F9',
+                            200: '#E2E8F0',
+                            300: '#CBD5E1',
+                            400: '#94A3B8',
+                            500: '#64748B',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1E293B',
+                            900: '#0F172A',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --carbon: #1A1A1A;
-            --oliva: #A3B899;
-            --oliva-hover: #8FA784;
-            --oliva-dark: #374631;
-            --hueso: #F5F5F5;
-            --plateado: #D1D5DB;
-            --plateado-light: #E5E7EB;
-            --texto-muted: #6B7280;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-        }
-
-        body {
-            background-color: var(--hueso);
-            color: var(--carbon);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Navbar: Negro Carbono con detalles en Verde Oliva */
-        .navbar {
-            background-color: var(--carbon);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            box-shadow: 0 4px 15px rgba(26, 26, 26, 0.15);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 0.65rem;
-            text-decoration: none;
-            color: #FFFFFF;
-            font-weight: 800;
-            font-size: 1.3rem;
-            letter-spacing: -0.02em;
-        }
-
-        .brand-icon-box {
-            width: 2.25rem;
-            height: 2.25rem;
-            background-color: var(--oliva);
-            color: var(--carbon);
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .btn-nav-link {
-            color: var(--plateado);
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 600;
-            padding: 0.5rem 0.95rem;
-            border-radius: 0.5rem;
-            transition: all 0.2s ease;
-        }
-
-        .btn-nav-link:hover {
-            color: #FFFFFF;
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .btn-nav-cta {
-            background-color: var(--oliva);
-            color: var(--carbon);
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 700;
-            padding: 0.5rem 1.1rem;
-            border-radius: 0.5rem;
-            transition: all 0.2s ease;
-        }
-
-        .btn-nav-cta:hover {
-            background-color: var(--oliva-hover);
-            transform: translateY(-1px);
-        }
-
-        /* Hero Section */
-        .hero {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4.5rem 1.5rem 3rem;
-            text-align: center;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background-color: rgba(163, 184, 153, 0.22);
-            border: 1px solid var(--oliva);
-            color: var(--oliva-dark);
-            padding: 0.35rem 1rem;
-            border-radius: 9999px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-title {
-            font-size: 3rem;
-            line-height: 1.15;
-            font-weight: 800;
-            color: var(--carbon);
-            margin-bottom: 1.25rem;
-            letter-spacing: -0.03em;
-        }
-
-        .hero-title span {
-            color: var(--oliva-dark);
-            border-bottom: 4px solid var(--oliva);
-            padding-bottom: 4px;
-        }
-
-        .hero-desc {
-            max-width: 620px;
-            margin: 0 auto 2.25rem;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: var(--texto-muted);
-        }
-
-        .hero-buttons {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn-hero-primary {
-            background-color: var(--oliva);
-            color: var(--carbon);
-            font-weight: 700;
-            font-size: 1rem;
-            padding: 0.85rem 1.85rem;
-            border-radius: 0.65rem;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            box-shadow: 0 4px 14px rgba(163, 184, 153, 0.45);
-            transition: all 0.2s ease;
-        }
-
-        .btn-hero-primary:hover {
-            background-color: var(--oliva-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(163, 184, 153, 0.55);
-        }
-
-        .btn-hero-secondary {
-            background-color: #FFFFFF;
-            color: var(--carbon);
-            border: 1.5px solid var(--plateado);
-            font-weight: 600;
-            font-size: 1rem;
-            padding: 0.85rem 1.85rem;
-            border-radius: 0.65rem;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .btn-hero-secondary:hover {
-            border-color: var(--carbon);
-            background-color: #FAFAFA;
-        }
-
-        /* Features Section */
-        .features-section {
-            max-width: 1200px;
-            margin: 2rem auto 4rem;
-            padding: 0 1.5rem;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .feature-card {
-            background: #FFFFFF;
-            border: 1px solid var(--plateado);
-            border-radius: 1.25rem;
-            padding: 2rem;
-            box-shadow: 0 4px 6px -1px rgba(26, 26, 26, 0.04);
-            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--oliva);
-            box-shadow: 0 12px 20px -5px rgba(26, 26, 26, 0.08);
-        }
-
-        .feature-icon-box {
-            width: 3.25rem;
-            height: 3.25rem;
-            border-radius: 0.75rem;
-            background-color: rgba(163, 184, 153, 0.2);
-            color: var(--oliva-dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.25rem;
-        }
-
-        .feature-title {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: var(--carbon);
-            margin-bottom: 0.5rem;
-        }
-
-        .feature-text {
-            color: var(--texto-muted);
-            font-size: 0.92rem;
-            line-height: 1.55;
-        }
-
-        /* Footer: Negro Carbono */
-        .footer {
-            background-color: var(--carbon);
-            color: var(--plateado);
-            padding: 2.5rem 1.5rem;
-            text-align: center;
-            margin-top: auto;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 0.875rem;
-        }
-
-        .footer strong {
-            color: #FFFFFF;
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
     </style>
 </head>
-<body>
-    <!-- Navbar: Negro Carbono con acentos Verde Oliva -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="{{ route('home') }}" class="brand-logo">
-                <div class="brand-icon-box">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="m6.5 6.5 11 11"></path>
-                        <path d="m21 21-1-1"></path>
-                        <path d="m3 3 1 1"></path>
-                        <path d="m18 22 4-4"></path>
-                        <path d="m2 6 4-4"></path>
-                        <path d="m3 10 7-7"></path>
-                        <path d="m14 21 7-7"></path>
-                    </svg>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col selection:bg-slate-900 selection:text-white">
+
+    <!-- Navbar Corporativo Minimalista -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Brand / Logo -->
+            <a href="{{ route('home') }}" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-xl bg-slate-900 group-hover:bg-slate-800 flex items-center justify-center text-white font-extrabold text-sm shadow-sm transition-all">
+                    RD
                 </div>
-                <span>GYM RD SPORT</span>
+                <div>
+                    <span class="text-base font-bold tracking-tight text-slate-900">Gym RDSport</span>
+                    <span class="hidden sm:block text-[10px] font-semibold uppercase tracking-wider text-slate-400">Plataforma Atlética</span>
+                </div>
             </a>
 
-            <div class="nav-actions">
+            <!-- Acciones de Navegación -->
+            <div class="flex items-center gap-3">
                 @auth
-                    <a href="{{ route('dashboard') }}" class="btn-nav-cta">
-                        Panel de Control
+                    <a href="{{ route('dashboard') }}" 
+                       class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold tracking-wide transition-all shadow-sm">
+                        <span>Mi Panel de Control</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
                     </a>
                 @else
-                    <a href="{{ route('login') }}" class="btn-nav-link">
+                    <a href="{{ route('login') }}" 
+                       class="px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
                         Iniciar Sesión
                     </a>
-                    <a href="{{ route('register') }}" class="btn-nav-cta">
-                        Registrarse
+                    <a href="{{ route('register') }}" 
+                       class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold tracking-wide transition-all shadow-sm">
+                        <span>Registrarse</span>
+                        <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
                     </a>
                 @endauth
             </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-badge">
-            Gimnasio & Centro de Entrenamiento
-        </div>
-        <h1 class="hero-title">
-            Eleva tu potencial con<br>
-            <span>GYM RD SPORT</span>
-        </h1>
-        <p class="hero-desc">
-            Instalaciones deportivas de alto nivel, entrenadores dedicados y un sistema moderno para gestionar tu progreso físico día a día.
-        </p>
-
-        <div class="hero-buttons">
-            @auth
-                <a href="{{ route('dashboard') }}" class="btn-hero-primary">
-                    Ir al Panel de Control
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </a>
-            @else
-                <a href="{{ route('login') }}" class="btn-hero-primary">
-                    Iniciar Sesión
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </a>
-                <a href="{{ route('register') }}" class="btn-hero-secondary">
-                    Crear Cuenta
-                </a>
-            @endauth
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features-section">
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon-box">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="9" cy="7" r="4"></circle>
-                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                    </svg>
+    <!-- Contenido Principal -->
+    <main class="flex-1">
+        
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden pt-12 pb-20 sm:pt-20 sm:pb-28">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                
+                <!-- Badge Superior -->
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-semibold mb-6 shadow-2xs">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span>Gestión de Rendimiento & Centro Deportivo</span>
                 </div>
-                <h3 class="feature-title">Gestión de Miembros</h3>
-                <p class="feature-text">Control completo de usuarios, roles de administrador y membresías activas para una administración eficiente.</p>
+
+                <!-- Título Principal -->
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15] max-w-4xl mx-auto">
+                    Eleva tu disciplina y alcanza tu <span class="bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-900 bg-clip-text text-transparent">máximo potencial</span>
+                </h1>
+
+                <!-- Descripción -->
+                <p class="mt-6 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                    Instalaciones de alto nivel, entrenadores profesionales certificados y un sistema digital integral para supervisar tus entrenamientos, membresías y progreso.
+                </p>
+
+                <!-- Botones de Acción Hero -->
+                <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+                    @auth
+                        <a href="{{ route('dashboard') }}" 
+                           class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold transition-all shadow-md">
+                            <span>Ir al Panel de Control</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                    @else
+                        <a href="{{ route('register') }}" 
+                           class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold transition-all shadow-md">
+                            <span>Comenzar Ahora</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                        <a href="{{ route('login') }}" 
+                           class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 text-sm font-bold border border-slate-200 transition-all shadow-2xs">
+                            <span>Acceso Miembros</span>
+                        </a>
+                    @endauth
+                </div>
+
+                <!-- Estadísticas / Tarjetas Resumidas -->
+                <div class="mt-14 max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 text-left">
+                    <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-2xs">
+                        <div class="text-2xl font-black text-slate-900">100%</div>
+                        <div class="text-xs font-medium text-slate-500 mt-0.5">Entrenadores Certificados</div>
+                    </div>
+                    <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-2xs">
+                        <div class="text-2xl font-black text-slate-900">Multi</div>
+                        <div class="text-xs font-medium text-slate-500 mt-0.5">Multi Disciplinas</div>
+                    </div>
+                    <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-2xs">
+                        <div class="text-2xl font-black text-slate-900">24/7</div>
+                        <div class="text-xs font-medium text-slate-500 mt-0.5">Control Digital</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Sección de Características y Pilares -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-slate-400">Infraestructura & Servicios</h2>
+                <p class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">Diseñado para maximizar tu disciplina</p>
             </div>
 
-            <div class="feature-card">
-                <div class="feature-icon-box">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="m6.5 6.5 11 11"></path>
-                        <path d="m21 21-1-1"></path>
-                        <path d="m3 3 1 1"></path>
-                        <path d="m18 22 4-4"></path>
-                        <path d="m2 6 4-4"></path>
-                    </svg>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Tarjeta 1: Entrenadores Dedicados -->
+                <div class="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="w-11 h-11 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-800 mb-5">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900">Entrenadores y Asesoría Técnica</h3>
+                        <p class="mt-2 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                            Personal capacitado asignado a tu plan de desarrollo para acompañarte en tu técnica, metas y acondicionamiento.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-xs font-semibold text-slate-700">
+                        <span>Seguimiento personalizado</span>
+                    </div>
                 </div>
-                <h3 class="feature-title">Equipamiento Deportivo</h3>
-                <p class="feature-text">Áreas acondicionadas con maquinaria especializada para fuerza, resistencia y entrenamiento funcional.</p>
-            </div>
 
-            <div class="feature-card">
-                <div class="feature-icon-box">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path>
-                    </svg>
+                <!-- Tarjeta 2: Planificación de Clases y Servicios -->
+                <div class="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="w-11 h-11 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-800 mb-5">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900">Horarios y Clases Grupales</h3>
+                        <p class="mt-2 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                            Programación dinámica de disciplinas como Crossfit, Spinning y Musculación libre con cupos administrados en tiempo real.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-xs font-semibold text-slate-700">
+                        <span>Horarios organizados</span>
+                    </div>
                 </div>
-                <h3 class="feature-title">Seguridad y Acceso</h3>
-                <p class="feature-text">Autenticación segura con protección contra fuerza bruta y sesiones optimizadas.</p>
+
+                <!-- Tarjeta 3: Control Administrativo y Asistencia -->
+                <div class="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="w-11 h-11 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-800 mb-5">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900">Control & Membresías</h3>
+                        <p class="mt-2 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                            Acceso seguro, registro puntual de asistencia y supervisión transparente de tus mensualidades e inscripciones.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-xs font-semibold text-slate-700">
+                        <span>Gestión sin fricciones</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Corporativo Minimalista -->
+    <footer class="bg-white border-t border-slate-200/80 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-slate-800">Gym RDSport</span>
+                <span>—</span>
+                <span>Centro Deportivo & Administrativo</span>
+            </div>
+            <div>
+                &copy; {{ date('Y') }} Todos los derechos reservados.
             </div>
         </div>
-    </section>
-
-    <!-- Footer: Negro Carbono -->
-    <footer class="footer">
-        &copy; {{ date('Y') }} <strong>Gym RD Sport</strong> — Todos los derechos reservados.
     </footer>
+
 </body>
 </html>

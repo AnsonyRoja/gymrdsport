@@ -4,362 +4,191 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Cuenta - Gym RD Sport</title>
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        slate: {
+                            50: '#F8FAFC',
+                            100: '#F1F5F9',
+                            200: '#E2E8F0',
+                            300: '#CBD5E1',
+                            400: '#94A3B8',
+                            500: '#64748B',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1E293B',
+                            900: '#0F172A',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --carbon: #1A1A1A;
-            --oliva: #A3B899;
-            --oliva-hover: #8FA784;
-            --oliva-dark: #374631;
-            --hueso: #F5F5F5;
-            --plateado: #D1D5DB;
-            --plateado-light: #E5E7EB;
-            --texto-muted: #6B7280;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-        }
-
-        body {
-            background-color: var(--hueso);
-            color: var(--carbon);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow-x: hidden;
-            padding: 2rem 1.5rem;
-        }
-
-        .ambient-shape-1 {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(163, 184, 153, 0.22) 0%, rgba(245, 245, 245, 0) 70%);
-            top: -120px;
-            right: -100px;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .ambient-shape-2 {
-            position: absolute;
-            width: 450px;
-            height: 450px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(26, 26, 26, 0.05) 0%, rgba(245, 245, 245, 0) 70%);
-            bottom: -100px;
-            left: -100px;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 480px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .card {
-            background: #FFFFFF;
-            border: 1px solid var(--plateado);
-            border-radius: 1.25rem;
-            padding: 2.25rem 2rem;
-            box-shadow: 0 10px 25px -5px rgba(26, 26, 26, 0.06), 0 8px 10px -6px rgba(26, 26, 26, 0.04);
-            transition: box-shadow 0.3s ease, border-color 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: var(--oliva);
-            box-shadow: 0 20px 30px -10px rgba(26, 26, 26, 0.08), 0 0 0 1px var(--oliva);
-        }
-
-        .brand-header {
-            text-align: center;
-            margin-bottom: 1.75rem;
-        }
-
-        .brand-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background-color: rgba(163, 184, 153, 0.18);
-            border: 1px solid var(--oliva);
-            color: var(--oliva-dark);
-            padding: 0.35rem 0.85rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 0.75rem;
-        }
-
-        .brand-title {
-            font-size: 1.75rem;
-            font-weight: 800;
-            color: var(--carbon);
-        }
-
-        .brand-title span {
-            color: var(--oliva-dark);
-            border-bottom: 3px solid var(--oliva);
-            padding-bottom: 2px;
-        }
-
-        .brand-subtitle {
-            color: var(--texto-muted);
-            font-size: 0.875rem;
-            margin-top: 0.4rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.15rem;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--carbon);
-            margin-bottom: 0.45rem;
-        }
-
-        .input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .input-icon {
-            position: absolute;
-            left: 1rem;
-            color: var(--texto-muted);
-            width: 1.2rem;
-            height: 1.2rem;
-            pointer-events: none;
-        }
-
-        .form-input, .form-select {
-            width: 100%;
-            background-color: #FFFFFF;
-            border: 1.5px solid var(--plateado);
-            color: var(--carbon);
-            font-size: 0.9375rem;
-            padding: 0.75rem 1rem 0.75rem 2.85rem;
-            border-radius: 0.65rem;
-            outline: none;
-            transition: all 0.2s ease;
-        }
-
-        .form-select {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            background-size: 1.15rem;
-            padding-right: 2.5rem;
-        }
-
-        .form-input:focus, .form-select:focus {
-            border-color: var(--oliva);
-            box-shadow: 0 0 0 3px rgba(163, 184, 153, 0.35);
-        }
-
-        .input-wrapper:focus-within .input-icon {
-            color: var(--oliva-dark);
-        }
-
-        .btn-submit {
-            width: 100%;
-            background-color: var(--oliva);
-            color: var(--carbon);
-            font-weight: 700;
-            font-size: 0.95rem;
-            padding: 0.85rem 1.5rem;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            border-radius: 0.65rem;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(163, 184, 153, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-            transition: all 0.2s ease;
-        }
-
-        .btn-submit:hover {
-            background-color: var(--oliva-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(163, 184, 153, 0.5);
-        }
-
-        .alert-error {
-            background: #FEE2E2;
-            border: 1px solid #FCA5A5;
-            color: #991B1B;
-            padding: 0.85rem 1rem;
-            border-radius: 0.65rem;
-            font-size: 0.875rem;
-            margin-bottom: 1.25rem;
-        }
-
-        .card-footer {
-            text-align: center;
-            margin-top: 1.5rem;
-            padding-top: 1.25rem;
-            border-top: 1px solid var(--plateado-light);
-            font-size: 0.85rem;
-            color: var(--texto-muted);
-        }
-
-        .card-footer a {
-            color: var(--carbon);
-            font-weight: 700;
-            text-decoration: underline;
-            text-decoration-color: var(--oliva);
-            text-underline-offset: 3px;
-            margin-left: 0.25rem;
-        }
-
-        .card-footer a:hover {
-            color: var(--oliva-dark);
-        }
-
-        .back-home {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            margin-top: 1.25rem;
-            color: var(--texto-muted);
-            text-decoration: none;
-            font-size: 0.8125rem;
-            font-weight: 500;
-        }
-
-        .back-home:hover {
-            color: var(--carbon);
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
     </style>
 </head>
-<body>
-    <div class="ambient-shape-1"></div>
-    <div class="ambient-shape-2"></div>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between selection:bg-slate-900 selection:text-white">
 
-    <div class="container">
-        <div class="card">
-            <div class="brand-header">
-                <div class="brand-badge">Nueva Membresía</div>
-                <h1 class="brand-title">Crear Cuenta en <span>Gym RD</span></h1>
-                <p class="brand-subtitle">Únete y empieza a entrenar con nosotros</p>
+    <!-- Navbar superior minimalista -->
+    <header class="w-full px-6 py-4 flex items-center justify-between border-b border-slate-200/70 bg-white/80 backdrop-blur-sm">
+        <a href="{{ route('home') }}" class="flex items-center gap-3 group">
+            <div class="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center text-white font-bold text-sm shadow-sm group-hover:bg-slate-800 transition-colors">
+                RD
             </div>
+            <div class="flex flex-col">
+                <span class="text-sm font-bold tracking-tight text-slate-900">Gym RDSport</span>
+                <span class="text-[10px] font-medium tracking-wider text-slate-400 uppercase">Registro de Usuarios</span>
+            </div>
+        </a>
 
-            @if ($errors->any())
-                <div class="alert-error">
-                    @foreach ($errors->all() as $error)
-                        <div>• {{ $error }}</div>
-                    @endforeach
-                </div>
-            @endif
+        <a href="{{ route('home') }}" class="text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-slate-100">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+            </svg>
+            Volver al inicio
+        </a>
+    </header>
 
-            <form action="{{ route('register') }}" method="POST">
-                @csrf
-
-                <!-- Nombre -->
-                <div class="form-group">
-                    <label for="name" class="form-label">Nombre Completo</label>
-                    <div class="input-wrapper">
-                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
+    <!-- Contenedor del Formulario -->
+    <main class="flex-1 flex items-center justify-center p-6 sm:p-8">
+        <div class="w-full max-w-md">
+            
+            <!-- Tarjeta Principal Impecable -->
+            <div class="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-8 sm:p-10">
+                
+                <!-- Encabezado de la Tarjeta -->
+                <div class="mb-8 text-center">
+                    <div class="inline-flex w-12 h-12 rounded-xl bg-slate-100 border border-slate-200/60 items-center justify-center text-slate-800 mb-4 shadow-xs">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
                         </svg>
-                        <input type="text" id="name" name="name" class="form-input" placeholder="Juan Pérez" value="{{ old('name') }}" required autofocus>
                     </div>
+                    <h1 class="text-2xl font-bold tracking-tight text-slate-900">Crear Cuenta</h1>
+                    <p class="text-xs text-slate-500 mt-1.5">Regístrate para comenzar a entrenar con nosotros</p>
                 </div>
 
-                <!-- Correo -->
-                <div class="form-group">
-                    <label for="email" class="form-label">Correo Electrónico</label>
-                    <div class="input-wrapper">
-                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                <!-- Notificaciones de Error -->
+                @if ($errors->any())
+                    <div class="mb-6 p-3.5 rounded-xl bg-rose-50 border border-rose-200/80 text-rose-800 text-xs font-medium flex items-start gap-2.5">
+                        <svg class="w-4 h-4 text-rose-600 shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
                         </svg>
-                        <input type="email" id="email" name="email" class="form-input" placeholder="juan@ejemplo.com" value="{{ old('email') }}" required>
-                    </div>
-                </div>
-
-                <!-- Rol -->
-                <div class="form-group">
-                    <label for="roles_id" class="form-label">Rol / Tipo de Usuario</label>
-                    <div class="input-wrapper">
-                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="9" cy="7" r="4"></circle>
-                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                        </svg>
-                        <select id="roles_id" name="roles_id" class="form-select" required>
-                            <option value="">Selecciona un rol...</option>
-                            @foreach ($roles as $rol)
-                                <option value="{{ $rol->id }}" {{ old('roles_id') == $rol->id ? 'selected' : '' }}>
-                                    {{ $rol->name }}
-                                </option>
+                        <div>
+                            @foreach ($errors->all() as $error)
+                                <p>{{ $error }}</p>
                             @endforeach
-                        </select>
+                        </div>
                     </div>
-                </div>
+                @endif
 
-                <!-- Contraseña -->
-                <div class="form-group">
-                    <label for="password" class="form-label">Contraseña (mínimo 8 caracteres)</label>
-                    <div class="input-wrapper">
-                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                <!-- Formulario -->
+                <form action="{{ route('register') }}" method="POST" class="space-y-4">
+                    @csrf
+
+                    <div>
+                        <label for="name" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+                            Nombre Completo
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                </svg>
+                            </div>
+                            <input type="text" id="name" name="name" value="{{ old('name') }}" required autofocus
+                                   placeholder="Juan Pérez"
+                                   class="w-full pl-10 pr-3.5 py-2.5 text-xs text-slate-800 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800 transition-colors placeholder:text-slate-400">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+                            Correo Electrónico
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.206"/>
+                                </svg>
+                            </div>
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" required
+                                   placeholder="correo@ejemplo.com"
+                                   class="w-full pl-10 pr-3.5 py-2.5 text-xs text-slate-800 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800 transition-colors placeholder:text-slate-400">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="password" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+                            Contraseña (mínimo 8 caracteres)
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                            </div>
+                            <input type="password" id="password" name="password" required
+                                   placeholder="••••••••"
+                                   class="w-full pl-10 pr-3.5 py-2.5 text-xs text-slate-800 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800 transition-colors placeholder:text-slate-400">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="password_confirmation" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+                            Confirmar Contraseña
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <input type="password" id="password_confirmation" name="password_confirmation" required
+                                   placeholder="••••••••"
+                                   class="w-full pl-10 pr-3.5 py-2.5 text-xs text-slate-800 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800 transition-colors placeholder:text-slate-400">
+                        </div>
+                    </div>
+
+                    <!-- Botón Elegante Corporativo -->
+                    <button type="submit"
+                            class="w-full mt-3 py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold tracking-wide transition-all shadow-sm hover:shadow flex items-center justify-center gap-2">
+                        <span>Completar Registro</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                         </svg>
-                        <input type="password" id="password" name="password" class="form-input" placeholder="••••••••" required>
-                    </div>
+                    </button>
+                </form>
+
+                <!-- Pie de Tarjeta -->
+                <div class="mt-8 pt-6 border-t border-slate-100 text-center">
+                    <p class="text-xs text-slate-500">
+                        ¿Ya tienes una cuenta?
+                        <a href="{{ route('login') }}" class="font-bold text-slate-900 hover:underline ml-1">
+                            Iniciar sesión
+                        </a>
+                    </p>
                 </div>
 
-                <!-- Confirmar Contraseña -->
-                <div class="form-group">
-                    <label for="password_confirmation" class="form-label">Confirmar Contraseña</label>
-                    <div class="input-wrapper">
-                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="m9 11 3 3L22 4"></path>
-                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-                        </svg>
-                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-input" placeholder="••••••••" required>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn-submit">
-                    Registrar Cuenta
-                </button>
-            </form>
-
-            <div class="card-footer">
-                ¿Ya tienes una cuenta?
-                <a href="{{ route('login') }}">Inicia Sesión</a>
             </div>
-        </div>
 
-        <div style="text-align: center;">
-            <a href="{{ route('home') }}" class="back-home">
-                ← Volver al inicio
-            </a>
         </div>
-    </div>
+    </main>
+
+    <!-- Footer Discreto -->
+    <footer class="w-full py-4 text-center text-[11px] text-slate-400 border-t border-slate-200/50">
+        &copy; {{ date('Y') }} Gym RDSport. Sistema de Gestión y Alto Rendimiento.
+    </footer>
+
 </body>
 </html>
