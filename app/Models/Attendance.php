@@ -18,6 +18,8 @@ class Attendance extends Model
         'hora_turno_inicio',
         'entrada',
         'salida',
+        'tipo_registro',
+        'resultado_acceso',
         'estatus',
         'observaciones',
     ];

@@ -58,7 +58,15 @@ class AuthController extends Controller
             RateLimiter::clear($throttleKey);
             $request->session()->regenerate();
 
-            return redirect()->intended(route('dashboard'))->with('success', '¡Bienvenido(a) a Gym RD Sport, '.Auth::user()->name.'!');
+            $user = Auth::user();
+            $redirectRoute = route('dashboard');
+            if ($user->isAdmin()) {
+                $redirectRoute = route('admin.dashboard');
+            } elseif ($user->isEntrenador()) {
+                $redirectRoute = route('trainer.dashboard');
+            }
+
+            return redirect()->intended($redirectRoute)->with('success', '¡Bienvenido(a) a Gym RD Sport, '.$user->name.'!');
         }
 
         RateLimiter::hit($throttleKey, 60);

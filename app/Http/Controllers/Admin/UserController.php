@@ -132,4 +132,31 @@ class UserController extends Controller
             return redirect()->route('admin.users.index')->withErrors(['reassign' => 'Error interno al procesar la reasignación.']);
         }
     }
+
+    /**
+     * TRX-02: Reasignación Masiva de Clientes a un Nuevo Entrenador
+     */
+    public function reassignBulk(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'clientes_ids' => 'required|array|min:1',
+            'clientes_ids.*' => 'required|integer|exists:users,id',
+            'entrenador_origen_id' => 'required|integer|exists:users,id',
+            'entrenador_destino_id' => 'required|integer|different:entrenador_origen_id|exists:users,id',
+        ], [
+            'clientes_ids.required' => 'Debe seleccionar al menos un cliente.',
+            'entrenador_destino_id.different' => 'El entrenador de destino debe ser diferente al de origen.',
+        ]);
+
+        $resultado = $this->asignacionServicio->reasignarMasivo(
+            $validated['clientes_ids'],
+            (int) $validated['entrenador_origen_id'],
+            (int) $validated['entrenador_destino_id']
+        );
+
+        return redirect()->route('admin.users.index')->with(
+            'success',
+            "Reasignación masiva completada: {$resultado['exitosos']} clientes transferidos con éxito."
+        );
+    }
 }

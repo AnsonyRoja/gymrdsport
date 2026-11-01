@@ -10,9 +10,17 @@
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-slate-200/60">
         <div>
             <h1 class="text-2xl font-bold tracking-tight text-slate-900">Gestión de Clientes y Atletas</h1>
-            <p class="text-xs text-slate-500 mt-1">Supervisa los clientes registrados, su estatus y realiza la reasignación dinámica de entrenadores (RFC-03 / TRX-02).</p>
+            <p class="text-xs text-slate-500 mt-1">Supervisa los clientes registrados, su estatus y realiza la reasignación dinámica de entrenadores.</p>
         </div>
-        <div>
+        <div class="flex items-center gap-3">
+            <button type="button" 
+                    onclick="document.getElementById('modalReasignacionMasiva').classList.remove('hidden')"
+                    class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition-all shadow-sm">
+                <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                </svg>
+                <span>Reasignación Masiva</span>
+            </button>
             <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-white border border-slate-200 text-slate-600 shadow-sm">
                 <span class="w-2 h-2 rounded-full bg-indigo-600"></span>
                 Total Clientes: {{ $clients->total() }}
@@ -226,8 +234,75 @@
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape') {
             closeReassignModal();
+            document.getElementById('modalReasignacionMasiva').classList.add('hidden');
         }
     });
 </script>
+
+<!-- Modal: Reasignación Masiva de Atletas (TRX-02) -->
+<div id="modalReasignacionMasiva" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full shadow-xl border border-slate-200 overflow-hidden">
+        <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
+            <div>
+                <h3 class="text-sm font-bold">Reasignación Masiva de Atletas</h3>
+                <p class="text-[11px] text-slate-300">Transfiere clientes en lote conservando el historial de rutinas</p>
+            </div>
+            <button type="button" onclick="document.getElementById('modalReasignacionMasiva').classList.add('hidden')" class="text-slate-400 hover:text-white text-lg font-bold">
+                ✕
+            </button>
+        </div>
+
+        <form action="{{ route('admin.users.reassign-bulk') }}" method="POST" class="p-6 space-y-4">
+            @csrf
+
+            <!-- Entrenador de Origen -->
+            <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Entrenador de Origen (Actual) *</label>
+                <select name="entrenador_origen_id" id="bulk_entrenador_origen" required class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:ring-1 focus:ring-slate-900">
+                    <option value="">-- Seleccionar entrenador actual --</option>
+                    @foreach($trainers as $trainer)
+                        <option value="{{ $trainer->id }}">{{ $trainer->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <!-- Clientes a Transferir -->
+            <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Clientes a Transferir *</label>
+                <p class="text-[11px] text-slate-400 mb-2">Selecciona los atletas que serán reasignados al nuevo entrenador:</p>
+                <div class="max-h-44 overflow-y-auto border border-slate-200 rounded-xl p-3 space-y-2 bg-slate-50/50">
+                    @foreach($clients as $c)
+                        <label class="flex items-center gap-2 text-xs text-slate-700 hover:text-slate-900 cursor-pointer">
+                            <input type="checkbox" name="clientes_ids[]" value="{{ $c->id }}" class="rounded text-slate-900 focus:ring-0">
+                            <span class="font-semibold">{{ $c->name }}</span>
+                            <span class="text-[10px] text-slate-400">({{ $c->email }})</span>
+                        </label>
+                    @endforeach
+                </div>
+            </div>
+
+            <!-- Entrenador de Destino -->
+            <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Entrenador de Destino (Nuevo) *</label>
+                <select name="entrenador_destino_id" id="bulk_entrenador_destino" required class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:ring-1 focus:ring-slate-900">
+                    <option value="">-- Seleccionar nuevo entrenador --</option>
+                    @foreach($trainers as $trainer)
+                        <option value="{{ $trainer->id }}">{{ $trainer->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <!-- Botones -->
+            <div class="pt-3 flex items-center justify-end gap-3 border-t border-slate-100">
+                <button type="button" onclick="document.getElementById('modalReasignacionMasiva').classList.add('hidden')" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800">
+                    Cancelar
+                </button>
+                <button type="submit" class="px-5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-all shadow-sm">
+                    Confirmar Reasignación Masiva
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection
 

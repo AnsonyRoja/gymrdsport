@@ -11,12 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->foreignId('roles_id')->nullable()->constrained('roles')->nullOnDelete();
             $table->enum('rol', ['admin', 'entrenador', 'cliente'])->default('cliente');
             $table->string('estado')->default('activo');
             $table->rememberToken();
@@ -47,5 +54,6 @@ return new class extends Migration
         Schema::dropIfExists('sessions');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('users');
+        Schema::dropIfExists('roles');
     }
 };

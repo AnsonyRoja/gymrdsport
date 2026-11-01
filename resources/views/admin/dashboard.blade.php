@@ -207,7 +207,7 @@
         <div class="bg-white rounded-xl border border-slate-200/90 p-6 shadow-sm flex flex-col justify-between">
             <div>
                 <div class="flex items-center gap-2 mb-1">
-                    <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-indigo-50 text-indigo-700 border border-indigo-100">RFC-03 / TRX-02</span>
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-indigo-50 text-indigo-700 border border-indigo-100">Operaciones Técnicas</span>
                 </div>
                 <h4 class="text-sm font-bold text-slate-900 tracking-tight">Asignación de Entrenadores</h4>
                 <p class="text-xs text-slate-500 mt-1">La reasignación dinámica está centralizada exclusivamente en la sección de Clientes para garantizar integridad de datos.</p>

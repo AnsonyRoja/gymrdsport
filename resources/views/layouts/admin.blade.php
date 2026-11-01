@@ -58,18 +58,8 @@
 
                 <!-- Navigation Links -->
                 <nav class="p-4 space-y-1">
-                    <p class="px-3 text-[11px] font-semibold tracking-wider text-slate-400 uppercase mb-2">Navegación</p>
-
-                    <a href="{{ route('dashboard') }}" 
-                       class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors {{ request()->routeIs('dashboard') ? 'bg-slate-100 text-slate-900 font-semibold' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }}">
-                        <svg class="w-5 h-5 {{ request()->routeIs('dashboard') ? 'text-slate-900' : 'text-slate-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-                        </svg>
-                        Mi Panel General
-                    </a>
-
-                    @if(auth()->check() && auth()->user()->rol === 'admin')
-                        <p class="px-3 text-[11px] font-semibold tracking-wider text-slate-400 uppercase mt-4 mb-2">Administración</p>
+                    @if(auth()->check() && (auth()->user()->isAdmin()))
+                        <p class="px-3 text-[11px] font-semibold tracking-wider text-slate-400 uppercase mb-2">Administración</p>
 
                         <a href="{{ route('admin.dashboard') }}" 
                            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors {{ request()->routeIs('admin.dashboard') ? 'bg-slate-900 text-white font-semibold' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">
@@ -87,12 +77,44 @@
                             Usuarios y Clientes
                         </a>
 
-                        <a href="#" 
-                           class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">
-                            <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="{{ route('admin.payments.index') }}" 
+                           class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors {{ request()->routeIs('admin.payments.*') ? 'bg-slate-100 text-slate-900 font-semibold' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }}">
+                            <svg class="w-5 h-5 {{ request()->routeIs('admin.payments.*') ? 'text-slate-900' : 'text-slate-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            Pagos y Facturación
+                        </a>
+
+                        <a href="{{ route('admin.memberships.index') }}" 
+                           class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors {{ request()->routeIs('admin.memberships.*') ? 'bg-slate-100 text-slate-900 font-semibold' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }}">
+                            <svg class="w-5 h-5 {{ request()->routeIs('admin.memberships.*') ? 'text-slate-900' : 'text-slate-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/>
                             </svg>
-                            Membresías
+                            Planes de Membresía
+                        </a>
+
+                        <a href="{{ route('admin.payment-methods.index') }}" 
+                           class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors {{ request()->routeIs('admin.payment-methods.*') ? 'bg-slate-100 text-slate-900 font-semibold' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }}">
+                            <svg class="w-5 h-5 {{ request()->routeIs('admin.payment-methods.*') ? 'text-slate-900' : 'text-slate-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                            </svg>
+                            Métodos de Pago
+                        </a>
+
+                        <a href="{{ route('admin.reports.index') }}" 
+                           class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors {{ request()->routeIs('admin.reports.*') ? 'bg-slate-100 text-slate-900 font-semibold' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }}">
+                            <svg class="w-5 h-5 {{ request()->routeIs('admin.reports.*') ? 'text-slate-900' : 'text-slate-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            Reportes y Estadísticas
+                        </a>
+
+                        <a href="{{ route('admin.access.kiosk') }}" 
+                           class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors {{ request()->routeIs('admin.access.*') ? 'bg-slate-100 text-slate-900 font-semibold' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }}">
+                            <svg class="w-5 h-5 {{ request()->routeIs('admin.access.*') ? 'text-slate-900' : 'text-slate-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                            Kiosco de Acceso
                         </a>
 
                         <a href="{{ route('admin.trainers.index') }}" 
@@ -117,6 +139,28 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                             </svg>
                             Servicios y Clases
+                        </a>
+                    @endif
+
+                    @if(auth()->check() && auth()->user()->isEntrenador() && !auth()->user()->isAdmin())
+                        <p class="px-3 text-[11px] font-semibold tracking-wider text-slate-400 uppercase mb-2">Entrenador</p>
+                        <a href="{{ route('trainer.dashboard') }}" 
+                           class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors {{ request()->routeIs('trainer.*') ? 'bg-emerald-600 text-white font-semibold' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }}">
+                            <svg class="w-5 h-5 {{ request()->routeIs('trainer.*') ? 'text-white' : 'text-slate-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                            Panel de Entrenador
+                        </a>
+                    @endif
+
+                    @if(auth()->check() && auth()->user()->isCliente())
+                        <p class="px-3 text-[11px] font-semibold tracking-wider text-slate-400 uppercase mb-2">Atleta</p>
+                        <a href="{{ route('dashboard') }}" 
+                           class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors {{ request()->routeIs('dashboard') ? 'bg-slate-100 text-slate-900 font-semibold' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }}">
+                            <svg class="w-5 h-5 {{ request()->routeIs('dashboard') ? 'text-slate-900' : 'text-slate-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                            </svg>
+                            Mi Panel de Atleta
                         </a>
                     @endif
                 </nav>
